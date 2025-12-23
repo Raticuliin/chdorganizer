@@ -11,3 +11,9 @@ export type FolderContent = {
   rootName: string //Nombre de la carpeta
   files: FileEntry[] // Lista de archivos
 }
+
+export type GameGroup = {
+  gameName: string
+  files: FileEntry[]
+  needsM3u: boolean
+}
