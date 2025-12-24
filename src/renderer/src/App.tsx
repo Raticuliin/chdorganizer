@@ -1,11 +1,6 @@
 import React from 'react'
-// 1. IMPORTAMOS EL ADAPTADOR (Tu "Cable USB" al disco duro)
-import { WebFileSystemAdapter } from './core/infrastructure/WebFileSystemAdapter'
 // 2. IMPORTAMOS EL STORE (Tu "Cerebro")
 import { useFileStore } from './ui/store/useFileStore'
-
-// Instanciamos el adaptador una sola vez fuera del componente
-const fileSystem = new WebFileSystemAdapter()
 
 function App(): React.JSX.Element {
   // ---------------------------------------------------------
@@ -14,18 +9,11 @@ function App(): React.JSX.Element {
   // - rootName, games, status: Para PINTAR (Leer)
   // - setFolderContent: Para ACTUALIZAR (Escribir)
   // ---------------------------------------------------------
-  const { rootName, games, status, setFolderContent } = useFileStore()
+  const { rootName, games, status, scanFolder } = useFileStore()
 
   // Esta función maneja el click del botón
   const handleOpenFolder = async (): Promise<void> => {
-    // A. Pedimos al usuario que elija carpeta (esto abre el popup del navegador)
-    const result = await fileSystem.selectAndReadFolder()
-
-    if (result) {
-      // B. Si eligió algo, se lo pasamos al Store
-      // ¡Aquí ocurre la magia! El Store recibe los archivos, los agrupa y avisa a React.
-      setFolderContent(result.rootName, result.files)
-    }
+    await scanFolder()
   }
 
   return (

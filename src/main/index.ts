@@ -2,6 +2,8 @@ import { app, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { is } from '@electron-toolkit/utils' // Utilidad opcional pero recomendada en electron-vite
 
+import { registerIpcHandlers } from './ipcHandlers'
+
 function createWindow(): void {
   // 1. Configuración de la Ventana
   const mainWindow = new BrowserWindow({
@@ -33,6 +35,8 @@ function createWindow(): void {
 
 // 4. Ciclo de Vida de la App
 app.whenReady().then(() => {
+  registerIpcHandlers()
+
   createWindow()
 
   app.on('activate', function () {
