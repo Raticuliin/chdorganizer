@@ -8,7 +8,7 @@ export type FileEntry = {
 }
 
 export type FolderContent = {
-  rootName: string //Nombre de la carpeta
+  rootPath: string //Nombre de la carpeta
   files: FileEntry[] // Lista de archivos
 }
 

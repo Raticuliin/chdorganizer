@@ -7,6 +7,9 @@ declare global {
     api: unknown
     electronAPI: {
       selectFolder: () => Promise<FolderContent | null>
+      createDirectory: (parentPath: string, name: string) => Promise<void>
+      moveFile: (filePath: string, destPath: string) => Promise<void>
+      writeFile: (fileName: string, content: string, subFolderName: string) => Promise<void>
     }
   }
 }

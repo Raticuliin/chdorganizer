@@ -12,7 +12,13 @@ if (process.contextIsolated) {
     contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
     contextBridge.exposeInMainWorld('electronAPI', {
-      selectFolder: () => ipcRenderer.invoke('dialog:openDirectory')
+      selectFolder: () => ipcRenderer.invoke('dialog:openDirectory'),
+      createDirectory: (parentPath: string, name: string) =>
+        ipcRenderer.invoke('fs:createDirectory', parentPath, name),
+      moveFile: (filePath: string, destPath: string) =>
+        ipcRenderer.invoke('fs:moveFile', filePath, destPath),
+      writeFile: (fileName: string, content: string, subFolderName?: string) =>
+        ipcRenderer.invoke('fs:writeFile', fileName, content, subFolderName)
     })
   } catch (error) {
     console.error(error)

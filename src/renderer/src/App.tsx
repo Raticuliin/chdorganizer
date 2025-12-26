@@ -69,41 +69,19 @@ function App(): React.JSX.Element {
               {/* Lista de Tarjetas */}
               <div className="grid gap-3">
                 {games.map((game, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-slate-800 p-4 rounded-lg border border-slate-700 shadow hover:border-blue-500 transition-colors"
-                  >
-                    {/* Título y Badge */}
-                    <div className="flex justify-between items-center mb-2">
-                      <h3 className="font-bold text-lg text-white flex items-center gap-2">
-                        💿 {game.gameName}
-                      </h3>
+                  <div key={idx} className="bg-slate-800 p-4 rounded-lg ...">
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-bold text-white">💿 {game.gameName}</h3>
 
-                      {game.needsM3u ? (
-                        <span className="bg-yellow-500/20 text-yellow-300 text-xs px-2 py-1 rounded border border-yellow-500/50 uppercase font-bold tracking-wide">
-                          Multidisco ({game.files.length})
-                        </span>
-                      ) : (
-                        <span className="bg-slate-700 text-slate-400 text-xs px-2 py-1 rounded uppercase font-bold">
-                          Single Disc
-                        </span>
-                      )}
+                      {/* BOTÓN DE PRUEBA */}
+                      <button
+                        onClick={() => useFileStore.getState().organizeTest(game)}
+                        className="text-xs bg-blue-600 px-2 py-1 rounded hover:bg-blue-500 transition-colors"
+                      >
+                        Test Mover
+                      </button>
                     </div>
-
-                    {/* Detalles si es Multidisco */}
-                    {game.needsM3u && (
-                      <div className="mt-2 text-sm bg-slate-900/50 p-3 rounded text-slate-400 font-mono">
-                        <p className="text-blue-400 text-xs mb-1">
-                          ↳ Se creará carpeta y playlist:
-                        </p>
-                        <p className="pl-4">📁 {game.gameName}.m3u/</p>
-                        {game.files.map((f, i) => (
-                          <p key={i} className="pl-8 text-xs text-slate-500">
-                            📄 {f.name}
-                          </p>
-                        ))}
-                      </div>
-                    )}
+                    {/* ... resto de tu tarjeta de juego */}
                   </div>
                 ))}
               </div>
